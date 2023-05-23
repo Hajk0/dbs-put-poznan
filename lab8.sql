@@ -59,3 +59,13 @@ UPDATE pracownicy P
 SELECT nazwisko, placa_pod FROM pracownicy ORDER BY nazwisko;
 
 -- 10
+SELECT * FROM pracownicy
+    WHERE placa_pod = (SELECT MIN(placa_pod) FROM pracownicy);
+
+-- 11
+UPDATE pracownicy
+    SET placa_pod = (SELECT ROUND(AVG(placa_pod), 2) FROM pracownicy)
+    WHERE placa_pod = (SELECT MIN(placa_pod) FROM pracownicy);
+SELECT * FROM pracownicy WHERE id_prac = 200;
+
+-- 12
