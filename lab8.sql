@@ -69,3 +69,14 @@ UPDATE pracownicy
 SELECT * FROM pracownicy WHERE id_prac = 200;
 
 -- 12
+SELECT nazwisko, placa_dod FROM pracownicy
+    WHERE id_zesp = 20 ORDER BY nazwisko;
+UPDATE pracownicy
+    SET placa_dod = ROUND((SELECT AVG(placa_pod) FROM pracownicy 
+        WHERE id_szefa = (SELECT id_prac FROM pracownicy WHERE nazwisko = 'MORZY')), 1)
+    WHERE id_zesp = 20;
+SELECT nazwisko, placa_dod FROM pracownicy
+    WHERE id_zesp = 20 ORDER BY nazwisko;
+
+-- 13
+
