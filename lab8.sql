@@ -104,3 +104,25 @@ SELECT * FROM pracownicy ORDER BY nazwisko;
 
 -- Sekwencje
 -- 16
+CREATE SEQUENCE prac_seq START WITH 300 INCREMENT BY 10;
+
+-- 17
+INSERT INTO pracownicy(id_prac, nazwisko, etat, id_szefa, zatrudniony, placa_pod, placa_dod, id_zesp)
+    VALUES (prac_seq.NEXTVAL, 'Trąbczyński', 'STAZYSTA', null, null, 1000, 300, null);
+SELECT * FROM pracownicy WHERE nazwisko = 'Trąbczyński';
+
+-- 18
+UPDATE pracownicy
+    SET placa_dod = prac_seq.CURRVAL
+    WHERE nazwisko = 'Trąbczyński';
+SELECT  * FROM pracownicy WHERE nazwisko = 'Trąbczyński';
+
+-- 19
+DELETE FROM pracownicy WHERE nazwisko = 'Trąbczyński';
+
+-- 20
+CREATE SEQUENCE mala_seq START WITH 1 INCREMENT BY 1 MAXVALUE 5;
+SELECT mala_seq.NEXTVAL FROM dual;
+
+-- 21
+DROP SEQUENCE mala_seq;
