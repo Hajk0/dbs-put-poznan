@@ -79,4 +79,28 @@ SELECT nazwisko, placa_dod FROM pracownicy
     WHERE id_zesp = 20 ORDER BY nazwisko;
 
 -- 13
+SELECT nazwisko, placa_pod
+    FROM pracownicy JOIN zespoly USING(id_zesp)
+    WHERE nazwa = 'SYSTEMY ROZPROSZONE'
+    ORDER BY nazwisko;
+UPDATE (SELECT * FROM pracownicy JOIN zespoly USING(id_zesp))
+    SET placa_pod = ROUND(placa_pod * 1.25, 2)
+    WHERE nazwa = 'SYSTEMY ROZPROSZONE';
+SELECT nazwisko, placa_pod
+    FROM pracownicy JOIN zespoly USING(id_zesp)
+    WHERE nazwa = 'SYSTEMY ROZPROSZONE'
+    ORDER BY nazwisko;
 
+-- 14
+SELECT p.nazwisko, (SELECT nazwisko FROM pracownicy pz WHERE p.id_szefa = pz.id_prac) FROM pracownicy p
+    WHERE id_szefa = (SELECT id_prac FROM pracownicy WHERE nazwisko = 'MORZY');
+DELETE FROM pracownicy
+    WHERE id_szefa = (SELECT id_prac FROM pracownicy WHERE nazwisko = 'MORZY');
+SELECT p.nazwisko, (SELECT nazwisko FROM pracownicy pz WHERE p.id_szefa = pz.id_prac) FROM pracownicy p
+    WHERE id_szefa = (SELECT id_prac FROM pracownicy WHERE nazwisko = 'MORZY');
+
+-- 15
+SELECT * FROM pracownicy ORDER BY nazwisko;
+
+-- Sekwencje
+-- 16
